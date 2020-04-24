@@ -209,7 +209,7 @@ router.get('/get-projects',(req,res)=>{
     })
 })
 
-router.post('/get-project-byStudentId',(req,res,next)=>{
+router.get('/get-project-byStudentId',(req,res,next)=>{
 
   console.log(req.body)
   Project.find({  StudentId : {$in: req.body.studentid }})
@@ -252,7 +252,7 @@ router.get('/get-students',(req,res,next)=>{
     })
 })
 
-router.get('/get-student-byId',(req,res)=>{
+router.post('/get-student-byId',(req,res)=>{
   Student.findById({_id:req.body.StudentId})
   .then(result=>{
     return res.json({
