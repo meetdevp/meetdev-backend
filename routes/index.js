@@ -209,7 +209,7 @@ router.get('/get-projects',(req,res)=>{
     })
 })
 
-router.get('/get-project-byStudentId',(req,res,next)=>{
+router.post('/get-project-byStudentId',(req,res,next)=>{
 
   console.log(req.body)
   Project.find({  StudentId : {$in: req.body.studentid }})
