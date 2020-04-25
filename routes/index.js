@@ -515,7 +515,7 @@ router.patch('/reject-request',(req,res)=>{
   })
 })
 
-router.patch('/cancle-request',(req,res)=>{
+router.patch('/cancel-request',(req,res)=>{
   Student.find({SendingRequest:req.body.ProjectId}) 
   .then(result=>{
     console.log(result)
