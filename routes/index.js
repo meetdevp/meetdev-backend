@@ -209,10 +209,10 @@ router.get('/get-projects',(req,res)=>{
     })
 })
 
-router.get('/get-project-byStudentId',(req,res,next)=>{
+router.post('/get-project-byStudentId',(req,res,next)=>{
 
   console.log(req.body)
-  Project.find({  StudentId : {$in: req.body.studentid }})
+  Project.find({  StudentId : {$in: req.body.StudentId }})
   //console.log(req.body.studentid)
   .then(doc=>{
     res.json(
@@ -338,7 +338,7 @@ router.post('/add-project',(req,res)=>{
         msg:"Successfully Uploaded",
         request:{
           type:"GET",
-          url:"http://localhost:3000/get-projects"
+          url:"https://minor-backend.herokuapp.com/get-projects"
         }
       })
     })
@@ -631,7 +631,7 @@ router.delete('/delete-student/:studentId',async(req,res)=>{
   else{
     return res.status(404).json({
       msg:"Student Not Found",
-      url:"http://localhost:3000/get-students"
+      url:"https://minor-backend.herokuapp.com/get-students"
     })
   }
   })
