@@ -125,7 +125,7 @@ router.post('/log-in',(req,res)=>{
     })
 })
 
-router.patch('/insert-details',upload.single('profileImage'),(req,res)=>{
+router.patch('/insert-details',(req,res)=>{
   console.log(req.file)
   Student.findByIdAndUpdate({_id:req.body.Id},{
     Department:req.body.Department,
