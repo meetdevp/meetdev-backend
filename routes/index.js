@@ -174,7 +174,6 @@ router.delete('/delete-students',(req,res)=>{
   })
 })
  
-
 router.delete('/delete-projects',(req,res)=>{
   Project.deleteMany({_id:{$in:req.body.Id}})
   .then(result=>{
@@ -190,6 +189,7 @@ router.delete('/delete-projects',(req,res)=>{
     })
   })
 })
+
 router.get('/get-projects',(req,res)=>{
   Project.find()
   .then(doc=>{
@@ -209,8 +209,23 @@ router.get('/get-projects',(req,res)=>{
     })
 })
 
-router.post('/get-project-byStudentId',(req,res,next)=>{
+router.get('/get-projectById/:projectId',(req,res,next)=>{
+  Project.findById({_id:req.params.projectId})
+  .then(result=>{
+    res.json({
+      project:result
+    })
+  })
+  .catch(err=>{
+    res.json({
+      msg:'failed getting project',
+      error:err
 
+    })
+  })
+})
+
+router.post('/get-project-byStudentId',(req,res,next)=>{
   console.log(req.body)
   Project.find({  StudentId : {$in: req.body.StudentId }})
   //console.log(req.body.studentid)
@@ -321,7 +336,7 @@ router.post('/add-project',(req,res)=>{
         })
   })
 
-  router.patch('/upload-screenshots',upload2.array('projectScreenShots'),(req,res,next)=>{
+router.patch('/upload-screenshots',upload2.array('projectScreenShots'),(req,res,next)=>{
     console.log(req.files)
     const paths=[]
     for(const x of req.files){
@@ -349,7 +364,7 @@ router.post('/add-project',(req,res)=>{
       })
     })
 
-  })
+})
 
 router.delete('/delete-project',(req,res)=>{
   Project.findByIdAndDelete({_id:req.body.projectId})
